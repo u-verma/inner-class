@@ -1,7 +1,5 @@
 # Inner-class: 
-The idea is to concise the bullet point for the concepts. Feel free to add if not covered
 
-Inner class: 
   1. A class defined inside another class. Below example the OuterClass defines the InnerClass. 
   2. The Inner class always represents the HAS-A relationship with Outer class. 
   3. The Inner class object can't be created without creating the Outer class object. Hence, 
