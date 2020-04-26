@@ -1,4 +1,4 @@
-# Inner-class
+# Inner-class : The idea is to consize the bullet point for the concepts. Feel free to add if not covered
 
 Inner class: 
   1. A class defined inside another class. Below example the OuterClass defines the InnerClass. 
