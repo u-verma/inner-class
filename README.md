@@ -1,4 +1,4 @@
-# Inner-class : 
+# Inner-class: 
 The idea is to concise the bullet point for the concepts. Feel free to add if not covered
 
 Inner class: 
