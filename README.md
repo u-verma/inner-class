@@ -1,4 +1,4 @@
-# Inner-class: 
+# Inner-class
 
   1. A class defined inside another class. Below example the OuterClass defines the InnerClass. 
   2. The Inner class always represents the HAS-A relationship with Outer class. 
