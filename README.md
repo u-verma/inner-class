@@ -1,7 +1,7 @@
 # Inner-classes
 
 # Bullet points
-  - A class defined inside another class. Below example the OuterClass defines the InnerClass. 
+  - A class defined inside another class. Below example the `Outer` defines the InnerClass. 
     
     ```
         public class Outer {
@@ -21,6 +21,8 @@
 
 # Note
   - Interface can also be defined in nested way. 
+  - Nested interfaces are static by default. Don't need to mark them static explicitly as it would be redundant.
+  - The nested interfaces declared inside interface is public implicitly.
    
     ```
         interface IOuter{
@@ -64,21 +66,19 @@
             }
         }
     ```  
-  - Nested interfaces are static by default. Don't need to mark them static explicitly as it would be redundant.
-  - The nested interfaces declared inside interface is public implicitly.
   - Nested interfaces declared inside class can take any access modifier like private and protected. 
    
     ```
-        public class OuterClass {
+        public class OuterClassWithInterfaceDeclaration {
              protected interface IInner{
                  void innerMethod();
              }
          }
          
-         class NestedInterfaceInsideClass implements OuterClass.IInner{
+         class NestedInterfaceInsideClass implements OuterClassWithInterfaceDeclaration.IInner{
          
              public static void main(String args[]){
-                 OuterClass.IInner obj= new NestedInterfaceInsideClass();
+                 OuterClassWithInterfaceDeclaration.IInner obj= new NestedInterfaceInsideClass();
                  obj.innerMethod();
              }
          
@@ -88,13 +88,24 @@
              }
          }  
     ```
+  - A class declared inside the interface is always public and static.
+    
+    ```
+          interface IOuter{
+              void outerMethod();
+              class InnerClass{
+                  void innerMethod();
+              }
+          }
+    ```
+  
 # Member or Normal/Regular Inner classes
     
 # Instance creation of Normal Inner class
   - Inner class can be declared as private as associated with instance behaviour.
   - From static area of Outer class or from outside of outer class, Inner class object is created using the Outer class object @see the below example `main` method.
     ```
-        Inner innerObject = new OuterClass().new Inner();
+        Inner innerObject = new OuterClassWithInterfaceDeclaration().new Inner();
     ```
   - The Inner class object can be created directly from instance area of outer class,
   as to access any instance method of outer class object must present. @see `createInnerClassInstance` in below example
@@ -108,7 +119,7 @@
             public static final Logger LOG = Logger.getLogger("Outer");
         
             public static void main(String[] args) {
-                Inner innerObject = new OuterClass().new Inner();
+                Inner innerObject = new OuterClassWithInterfaceDeclaration().new Inner();
                 innerObject.innerMethod();
             }
             
@@ -136,7 +147,7 @@
 
     ```
         public class OuterMemberAccess {
-               public static final Logger LOG = Logger.getLogger("OuterClass");
+               public static final Logger LOG = Logger.getLogger("OuterClassWithInterfaceDeclaration");
            
                private int instanceMember = 10;
                static int staticMember = 100;
@@ -373,3 +384,57 @@
 | Any number of constructor can be defined | Can't define a constructor, as to define the constructor class name is required. But it doesn't have any name |
 
 # Static nested class
+
+ - If a Inner class defined with static then it becomes static nested class. 
+ - A static nested class, not strongly associated with outer class.
+ - Unlike Normal inner class the Static Inner class can exist without Outer class object.
+ - Outer class object is not required to create the object of inner class.
+ 
+   ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class OuterClass {
+            public static final Logger LOG = Logger.getLogger(OuterClass.class.getName());
+            public static void main(String[] args) {
+                Nested nested = new Nested();
+                nested.nestedMethod();
+            }
+            static class Nested{
+                public void nestedMethod(){
+                    LOG.log(Level.INFO, "Inside Nested inner class");
+                }
+            }
+        }
+
+   ```
+ - The object of nested class can be created from outside of the outer class, as below.
+   
+   ```
+       OuterClass.Nested nested = new OuterClass.Nested();
+   ```
+ - As the static inner class is not associated with the instance of outer class, 
+ unlike normal inner class static member can be defined including `main()` method.
+ - It can be executed from command line `java OuterClass$Nested`
+   
+   ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class OuterClass {
+            public static final Logger LOG = Logger.getLogger(OuterClass.class.getName());
+            static class Nested {
+                public static void main(String[] args) {
+                    LOG.log(Level.INFO, "Inside Nested inner class");
+                    new Nested().nestedMethod()
+                }
+        
+                public void nestedMethod() {
+                    LOG.log(Level.INFO, "Inside Nested inner class");
+                }
+            }
+        }
+
+   ```
+ - As the static behavior doesn't associate with an instance `this` can't be used inside the static Nested class. 
+ - Unlike normal inner class the non-static member can't be accessed from the Nested class.

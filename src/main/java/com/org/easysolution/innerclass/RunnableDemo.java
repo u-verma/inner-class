@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RunnableDemo {
-    public static final Logger LOG = Logger.getLogger("Person");
+    public static final Logger LOG = Logger.getLogger(RunnableDemo.class.getName());
 
     public static void main(String[] args) {
         Runnable runnable = new Runnable() {

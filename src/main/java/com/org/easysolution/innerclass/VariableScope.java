@@ -11,7 +11,7 @@ public class VariableScope {
 }
 
 class OuterAccess {
-    public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
+    public static final Logger LOG = Logger.getLogger(OuterAccess.class.getName());
     int x = 10;
 
     class InnerAccess {

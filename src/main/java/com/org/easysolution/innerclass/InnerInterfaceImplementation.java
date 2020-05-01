@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class InnerInterfaceImplementation implements IOuter.IInner {
 
-    public static final Logger LOG = Logger.getLogger("InnerInterfaceImplementation");
+    public static final Logger LOG = Logger.getLogger(InnerInterfaceImplementation.class.getName());
 
     public static void main(String args[]) {
         IOuter.IInner obj = new InnerInterfaceImplementation();

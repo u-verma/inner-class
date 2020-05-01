@@ -3,11 +3,11 @@ package com.org.easysolution.innerclass;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NestedInterfaceInsideClass implements OuterClass.IInner {
-    public static final Logger LOG = Logger.getLogger("NestedInterfaceInsideClass");
+public class NestedInterfaceInsideClass implements OuterClassWithInterfaceDeclaration.IInner {
+    public static final Logger LOG = Logger.getLogger(NestedInterfaceInsideClass.class.getName());
 
     public static void main(String args[]) {
-        OuterClass.IInner obj = new NestedInterfaceInsideClass();
+        OuterClassWithInterfaceDeclaration.IInner obj = new NestedInterfaceInsideClass();
         obj.innerMethod();
     }
 
@@ -18,7 +18,7 @@ public class NestedInterfaceInsideClass implements OuterClass.IInner {
 
 }
 
-class OuterClass {
+class OuterClassWithInterfaceDeclaration {
     protected interface IInner {
         void innerMethod();
     }

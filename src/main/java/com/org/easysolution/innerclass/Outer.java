@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Outer {
-    public static final Logger LOG = Logger.getLogger("OuterClass");
+    public static final Logger LOG = Logger.getLogger(Outer.class.getName());
 
     public static void main(String[] args) {
         Inner innerObject = new Outer().new Inner();

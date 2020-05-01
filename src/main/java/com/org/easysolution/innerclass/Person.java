@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Person {
-    public static final Logger LOG = Logger.getLogger("Person");
+    public static final Logger LOG = Logger.getLogger(Person.class.getName());
 
     public void displayName() {
         LOG.log(Level.INFO, "Name is Person");

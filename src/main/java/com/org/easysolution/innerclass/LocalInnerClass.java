@@ -4,7 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LocalInnerClass {
-    public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+    public static final Logger LOG = Logger.getLogger(LocalInnerClass.class.getName());
+
     private String outerInstanceVariable = "OuterInstanceVariable";
     private int outerIntVariable = 100;
     private static String outerStaticMember = "OuterStaticMember";
