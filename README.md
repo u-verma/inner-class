@@ -12,8 +12,8 @@
   - There are two types of inner classes non-static and static inner classes.The static inner classes are known as static-nested classes.
        - Non-static nested class (inner class)
             - Member inner class or Regular/Normal Inner class
+            - Local inner class or Method Local Inner class
             - Anonymous inner class
-            - Local inner class
        - Static nested class
   - The Inner class always represents the HAS-A relationship with Outer class. 
   - The Inner class object can't be created without creating the Outer class object. Hence, 
@@ -88,6 +88,7 @@
              }
          }  
     ```
+# Member or Normal/Regular Inner classes
     
 # Instance creation of Normal Inner class
   - Inner class can be declared as private as associated with instance behaviour.
@@ -130,7 +131,9 @@
   static member inside normal inner class.
   - Normal Inner class can't declare the *static* member but still can access the static member of outer class.
   - Normal Inner class can access both static and non static member of outer class directly. 
-    
+  - Normal Inner can also be declared private, protected in addition to all other modifier(public, default, final, abstract, strictfp) applicable for normal class. 
+  - Once the normal Inner class, declared as static, it becomes special case of static inner class. Explained in details later in the other section. 
+
     ```
         public class OuterMemberAccess {
                public static final Logger LOG = Logger.getLogger("OuterClass");
@@ -190,3 +193,102 @@
         }
     
     ``` 
+# Local or Method Local Inner class
+  - Local classes can be defined inside any block. For example, you can define a local class in a method body, a for loop, or an if clause.
+  - Local classes are similar to inner classes because they cannot define or declare any static members.
+  - Local inner classes can't be declared public, protected, private and static similar to a method local variable, in addition it can be declared abstract.
+  - The scope of the inner class limited to the block where it is defined. Example if declared in **if** block it will be accessible in if block.
+  - If the Local Inner classes created inside method body the scope limited to method. The object of the class can be created in the method only.
+  - if Local classes defined in instance method then it can access both static and non-static member of Outer class directly. 
+    
+    ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class LocalInnerClass {
+            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+            private String outerInstanceVariable = "OuterInstanceVariable";
+            private int outerIntVariable = 100;
+            private static String outerStaticMember = "OuterStaticMember";
+        
+            public static void main(String[] args) {
+                new LocalInnerClass().withBlockInnerClass();
+            }
+        
+            public void withBlockInnerClass() {
+                boolean createBlockInnerClass = true;
+                if (createBlockInnerClass) {
+                    class BlockInnerClass {
+                        public void executeInnerMethod() {
+                            outerInstanceVariable = "";
+                            outerIntVariable = 20;
+                            LOG.log(Level.INFO, "Inside blockInnerMethod");
+                            LOG.log(Level.INFO, "Access Outer Instance Variable: " + outerInstanceVariable);
+                            LOG.log(Level.INFO, "Access Outer primitive Variable: " + outerIntVariable);
+                            LOG.log(Level.INFO, "Access Outer static Variable: " + outerStaticMember);
+                        }
+                    }
+                    BlockInnerClass innerClass = new BlockInnerClass();
+                    innerClass.executeInnerMethod();
+                }
+            }
+        }
+    
+    ```
+  - Local Inner classes can access the local member (of block or method) only if they are declared final.
+    
+    ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class LocalInnerClass {
+            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+        
+            public static void main(String[] args) {
+                new LocalInnerClass().withInnerMember("Method Parameter");
+            }
+        
+            public void withInnerMember(String methodParameter) {
+                final String localMember = "Local Member";
+                class BlockInnerClass {
+                    public void executeInnerMethod() {
+                        LOG.log(Level.INFO, "Inside blockInnerMethod");
+                        LOG.log(Level.INFO, "Access local Member: " + localMember);
+                        LOG.log(Level.INFO, "Access method parameter: " + methodParameter);
+                    }
+                }
+                BlockInnerClass innerClass = new BlockInnerClass();
+                innerClass.executeInnerMethod();
+            }
+        }
+    
+    ```
+  - if Local classes defined in static method then it can only access both static member of Outer class directly. 
+    ```
+        public class LocalInnerClass {
+            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+            private String outerInstanceVariable = "OuterInstanceVariable";
+            private int outerIntVariable = 100;
+            private static String outerStaticMember = "OuterStaticMember";
+        
+            public static void main(String[] args) {
+               LocalInnerClass.withInnerClass();
+            }
+        
+            public static void withInnerClass() {
+                class BlockInnerClass {
+                    public void executeInnerMethod() {
+                        LOG.log(Level.INFO, "Inside blockInnerMethod");
+                        //Compile Time error at below line
+                        LOG.log(Level.INFO, "Access Outer Instance Variable: " + outerInstanceVariable);
+                        //Compile Time error at below line
+                        LOG.log(Level.INFO, "Access Outer primitive Variable: " + outerIntVariable);
+                        LOG.log(Level.INFO, "Access Outer static Variable: " + outerStaticMember);
+                    }
+                }
+                BlockInnerClass innerClass = new BlockInnerClass();
+                innerClass.executeInnerMethod();
+            }
+        }
+        
+    ```

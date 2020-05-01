@@ -1,6 +1,11 @@
 package com.org.easysolution.innerclass;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class InnerInterfaceImplementation implements IOuter.IInner {
+
+    public static final Logger LOG = Logger.getLogger("InnerInterfaceImplementation");
 
     public static void main(String args[]) {
         IOuter.IInner obj = new InnerInterfaceImplementation();
@@ -9,7 +14,7 @@ public class InnerInterfaceImplementation implements IOuter.IInner {
 
     @Override
     public void innerMethod() {
-        System.out.println("Inner Nested interface method");
+        LOG.log(Level.INFO, "Inner Nested interface method");
     }
 }
 
