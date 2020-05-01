@@ -118,7 +118,7 @@
   
     ```
         public class Outer {
-            public static final Logger LOG = Logger.getLogger("Outer");
+            public static final Logger LOG = Logger.getLogger(Outer.class.getName());
         
             public static void main(String[] args) {
                 Inner innerObject = new OuterClassWithInterfaceDeclaration().new Inner();
@@ -149,7 +149,7 @@
 
     ```
         public class OuterMemberAccess {
-               public static final Logger LOG = Logger.getLogger("OuterClassWithInterfaceDeclaration");
+               public static final Logger LOG = Logger.getLogger(OuterMemberAccess.class.getNAme());
            
                private int instanceMember = 10;
                static int staticMember = 100;
@@ -185,7 +185,7 @@
         }
         
         class OuterAccess {
-            public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
+            public static final Logger LOG = Logger.getLogger(OuterAccess.class.getName());
             int x = 10;
         
             class InnerAccess {
@@ -219,7 +219,7 @@
         import java.util.logging.Logger;
         
         public class LocalInnerClass {
-            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+            public static final Logger LOG = Logger.getLogger(LocalInnerClass.class.getName());
             private String outerInstanceVariable = "OuterInstanceVariable";
             private int outerIntVariable = 100;
             private static String outerStaticMember = "OuterStaticMember";
@@ -258,7 +258,7 @@
         import java.util.logging.Logger;
         
         public class LocalInnerClass {
-            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+            public static final Logger LOG = Logger.getLogger(LocalInnerClass.class.getName());
         
             public static void main(String[] args) {
                 new LocalInnerClass().withInnerMember("Method Parameter");
@@ -282,7 +282,7 @@
   - if Local classes defined in static method then it can only access both static member of Outer class directly. 
     ```
         public class LocalInnerClass {
-            public static final Logger LOG = Logger.getLogger("LocalInnerClass");
+            public static final Logger LOG = Logger.getLogger(LocalInnerClass.class.getName());
             private String outerInstanceVariable = "OuterInstanceVariable";
             private int outerIntVariable = 100;
             private static String outerStaticMember = "OuterStaticMember";
@@ -326,7 +326,7 @@
         import java.util.logging.Logger;
         
         public class Person {
-            public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
+            public static final Logger LOG = Logger.getLogger(Person.class.getName());
         
             public void displayName() {
                 LOG.log(Level.INFO, "Name is Person");
@@ -358,7 +358,7 @@
         import java.util.logging.Logger;
         
         public class RunnableDemo {
-            public static final Logger LOG = Logger.getLogger("Person");
+            public static final Logger LOG = Logger.getLogger(Person.class.getName());
         
             public static void main(String[] args) {
                 Runnable runnable = new Runnable() {
