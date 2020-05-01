@@ -94,7 +94,9 @@
           interface IOuter{
               void outerMethod();
               class InnerClass{
-                  void innerMethod();
+                  void innerMethod(){
+                     System.out.println("Inner Method");
+                  }
               }
           }
     ```
