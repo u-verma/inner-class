@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OuterMemberAccess {
-    public static final Logger LOG = Logger.getLogger("OuterClass");
+    public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
 
     private int instanceMember = 10;
     static int staticMember = 100;

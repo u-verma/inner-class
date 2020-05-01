@@ -152,3 +152,41 @@
            }
 
     ```
+# Variable scope 
+  - In side the normal inner class **this** keyword always refer to inner class object  
+  - In case of namespace conflict, the nearest member takes the precedence. 
+  - Below is the way how to access members in case of namespace conflict.
+  
+    ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class VariableScope {
+            public static void main(String[] args) {
+                OuterAccess.InnerAccess obj = new OuterAccess().new InnerAccess();
+                obj.innerMethodScope();
+            }
+        }
+        
+        class OuterAccess {
+            public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
+            int x = 10;
+        
+            class InnerAccess {
+                int x = 100;
+        
+                public void innerMethodScope() {
+                    int x = 1000;
+                    LOG.log(Level.INFO, "Local variable access : " + x);
+                    // this always refer to inner class object
+                    LOG.log(Level.INFO, "Inner variable access : " + this.x); 
+                    // this is fancy way.
+                    LOG.log(Level.INFO, "Inner variable access : " + InnerAccess.this.x);
+    
+                    LOG.log(Level.INFO, "Outer variable access : " + OuterAccess.this.x);
+        
+                }
+            }
+        }
+    
+    ``` 

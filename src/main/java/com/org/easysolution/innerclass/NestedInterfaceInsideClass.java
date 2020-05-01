@@ -1,12 +1,6 @@
 package com.org.easysolution.innerclass;
 
-public class OuterClass {
-    protected interface IInner {
-        void innerMethod();
-    }
-}
-
-class NestedInterfaceInsideClass implements OuterClass.IInner {
+public class NestedInterfaceInsideClass implements OuterClass.IInner {
 
     public static void main(String args[]) {
         OuterClass.IInner obj = new NestedInterfaceInsideClass();
@@ -16,5 +10,12 @@ class NestedInterfaceInsideClass implements OuterClass.IInner {
     @Override
     public void innerMethod() {
         System.out.println("Nested interface method");
+    }
+
+}
+
+class OuterClass {
+    protected interface IInner {
+        void innerMethod();
     }
 }
