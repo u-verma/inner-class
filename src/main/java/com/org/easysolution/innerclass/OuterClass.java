@@ -1,24 +1,20 @@
 package com.org.easysolution.innerclass;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class OuterClass {
-    public static final Logger LOG = Logger.getLogger("OuterClass");
+    protected interface IInner {
+        void innerMethod();
+    }
+}
 
-    public static void main(String[] args) {
-        InnerClass innerObject = new OuterClass().new InnerClass();
-        innerObject.innerMethod();
+class NestedInterfaceInsideClass implements OuterClass.IInner {
+
+    public static void main(String args[]) {
+        OuterClass.IInner obj = new NestedInterfaceInsideClass();
+        obj.innerMethod();
     }
 
-    public void createInnerClassInstance(){
-        InnerClass fromInstanceMethod =  new InnerClass();
-        fromInstanceMethod.innerMethod();
-    }
-
-    class InnerClass {
-        public void innerMethod() {
-            LOG.log(Level.INFO, "InnerMethod");
-        }
+    @Override
+    public void innerMethod() {
+        System.out.println("Nested interface method");
     }
 }
