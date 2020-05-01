@@ -92,12 +92,12 @@
     
 # Instance creation of Normal Inner class
   - Inner class can be declared as private as associated with instance behaviour.
-  - From static area of Outer class or from outside of outer class, Inner class object is created using the Outer class object @see the below example **main** method.
+  - From static area of Outer class or from outside of outer class, Inner class object is created using the Outer class object @see the below example `main` method.
     ```
         Inner innerObject = new OuterClass().new Inner();
     ```
   - The Inner class object can be created directly from instance area of outer class,
-  as to access any instance method of outer class object must present. @see **createInnerClassInstance** in below example
+  as to access any instance method of outer class object must present. @see `createInnerClassInstance` in below example
   
     ```
         Inner fromInstanceMethod =  new Inner();
@@ -126,8 +126,8 @@
     ```
 # The static keyword in context to Normal/Regular Inner classes 
   - Normal Inner class depict the instance behaviour, so the static variable and static 
-  method including **main method** can't be declare inside the inner class.
-  - Compile time error ***(Inner classes can't have static declaration)*** thrown when declare the 
+  method including `main method` can't be declare inside the inner class.
+  - Compile time error `*(Inner classes can't have static declaration)`* thrown when declare the 
   static member inside normal inner class.
   - Normal Inner class can't declare the *static* member but still can access the static member of outer class.
   - Normal Inner class can access both static and non static member of outer class directly. 
@@ -156,7 +156,7 @@
 
     ```
 # Variable scope 
-  - In side the normal inner class **this** keyword always refer to inner class object  
+  - In side the normal inner class `this` keyword always refer to inner class object  
   - In case of namespace conflict, the nearest member takes the precedence. 
   - Below is the way how to access members in case of namespace conflict.
   
@@ -197,7 +197,7 @@
   - Local classes can be defined inside any block. For example, you can define a local class in a method body, a for loop, or an if clause.
   - Local classes are similar to inner classes because they cannot define or declare any static members.
   - Local inner classes can't be declared public, protected, private and static similar to a method local variable, in addition it can be declared abstract.
-  - The scope of the inner class limited to the block where it is defined. Example if declared in **if** block it will be accessible in if block.
+  - The scope of the inner class limited to the block where it is defined. Example if declared in `if` block it will be accessible in if block.
   - If the Local Inner classes created inside method body the scope limited to method. The object of the class can be created in the method only.
   - if Local classes defined in instance method then it can access both static and non-static member of Outer class directly. 
     
@@ -237,7 +237,7 @@
     ```
   - Local Inner classes can access the local member (of block or method) only if they are declared final. 
   - As local variable created in the stack and will be available till the method execution and then will be 
-  removed in contras Objects reside on the heap and removed by **GC**. That is the reason why normal variable can't be used inside the local Inner class.
+  removed in contras Objects reside on the heap and removed by `GC`. That is the reason why normal variable can't be used inside the local Inner class.
   - As the Final variable gets replaced by the constant value at the compile time it can be used accessed by Local Inner classes. 
   
     ```
@@ -295,3 +295,81 @@
         }
         
     ```
+# Anonymous Inner Class
+
+  - It is an inner class without a name and for which only a single object is created.
+  - Based on declaration and behavior Anonymous inner class can be classified into three types.
+     - Anonymous inner class extends a class
+     - Anonymous inner class implements an interface.
+     - Anonymous inner class defined inside arguments
+# 
+  - Anonymous Class extends a class. Below, is the anonymous object created by extending Person class.
+  - As this is defined in Person It will be the outer class and compiler will create the inner class with the name `Person$1.class`.
+  - Below is the typical example of Overriding. Here the anonymous class has overridden the `displayName()` method of Person.
+  - As the anonymous class is the child of Person class the `displayAge` method can be access though by its object. 
+      
+    ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class Person {
+            public static final Logger LOG = Logger.getLogger("OuterMemberAccess");
+        
+            public void displayName() {
+                LOG.log(Level.INFO, "Name is Person");
+            }
+        
+            public void displayAge() {
+                LOG.log(Level.INFO, "Age from the super class");
+            }
+        
+            public static void main(String[] args) {
+                Person anonymousObject = new Person() {
+                    public void displayName() {
+                        LOG.log(Level.INFO, "Name from Anonymous class");
+                    }
+                };
+                anonymousObject.displayName();
+                anonymousObject.displayAge();
+                LOG.log(Level.INFO, anonymousObject.getClass().getName());
+            }
+        }
+    
+    ```
+# 
+  - Anonymous Class Implements a interface. Below, is the anonymous object created by implementing Runnable.
+  - In the below example `runnable` is the object of anonymous class which implements Runnable.
+    
+    ```
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
+        
+        public class RunnableDemo {
+            public static final Logger LOG = Logger.getLogger("Person");
+        
+            public static void main(String[] args) {
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        int i = 0;
+                        while (i < 10) {
+                            LOG.log(Level.INFO, "Running the run job: " + i);
+                            i++;
+                        }
+                    }
+                };
+        
+                Thread thread = new Thread(runnable);
+                thread.start();
+            }
+        }
+    
+    ```
+# Comparision between Normal java class and Anonymous Class
+
+| Normal Java class | Anonymous Java Class |
+| --- | --- |
+| Normal Class can extends a class and also can implement the Interface | Anonymous class can either exetnds a class or implement a Interface |
+| Any number of constructor can be defined | Can't define a constructor, as to define the constructor class name is required. But it doesn't have any name |
+
+# Static nested class
