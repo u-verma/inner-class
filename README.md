@@ -235,8 +235,11 @@
         }
     
     ```
-  - Local Inner classes can access the local member (of block or method) only if they are declared final.
-    
+  - Local Inner classes can access the local member (of block or method) only if they are declared final. 
+  - As local variable created in the stack and will be available till the method execution and then will be 
+  removed in contras Objects reside on the heap and removed by **GC**. That is the reason why normal variable can't be used inside the local Inner class.
+  - As the Final variable gets replaced by the constant value at the compile time it can be used accessed by Local Inner classes. 
+  
     ```
         import java.util.logging.Level;
         import java.util.logging.Logger;
